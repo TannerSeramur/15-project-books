@@ -24,8 +24,7 @@ router.get('/searches/new', newSearch);
 router.get('/books/:id', getBook);
 router.post('/books', createBook);
 router.put('/books/:id', updateBook);
-// router.delete('/books/:id', deleteBook);
-// router.get('*', (request, response) => response.status(404).send('This route does not exist'));
+router.delete('/books/:id', deleteBook);
 
 
 function getBooks(req, res, next){
@@ -83,24 +82,17 @@ function createBook(req, res, next){
     .then(results => {
       console.log(results, 'results HERE');
       
-      bookShelf.get(results.shelf)
+      bookShelf.get(results)
       .then(data => {
         console.log("  ⭐️  ",results,'BREAK', data, "  ⭐️  ");
         res.render('pages/books/show', {
           book: results, bookshelves: data
         });
-      
-      // bookShelf.get(moreResults => {
-      //   console.log('hit');
-        
-      //   console.log(results, moreResults);
-        
-      // })
-
     })
     
   })
 };
+
 
 function updateBook(req , res, next){
   books.put(request.params.id, request.body)
@@ -108,6 +100,11 @@ function updateBook(req , res, next){
     .catch(next);
 }
 
+function deleteBook(request, response, next) {
+  books.delete(request.params.id)
+    .then( response.status(200).json({status: 'success'}) )
+    .catch( next );
+}
     
     
 

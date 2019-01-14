@@ -10,15 +10,17 @@ const book =  mongoose.Schema({
   isbn: {type: String},
   image_url: {type: String},
   description: {type: String},
+  name: {type: String},
   bookshelf_id: {type: String},
 },{toObject:{virtuals:true}, toJSON:{virtuals:true}});
 
-book.virtual('bookShelf', {
-  ref: 'booksShelf',
-  localField: 'bookshelf_id',
-  foreignField: 'shelf',
-  justOne: false,
-})
+// book.virtual('bookShelf', {
+//   ref: 'booksShelf',
+//   localField: 'bookshelf_id',
+//   foreignField: 'shelf',
+//   justOne: false,
+// })
+
 
 // category.virtual('products', {
 //   ref: 'products',
