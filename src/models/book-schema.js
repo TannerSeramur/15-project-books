@@ -1,32 +1,30 @@
+
 'use strict';
+const bookshelf = require('./bookshelf-schema');
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);
-// ,{toObject:{virtuals:true}, toJSON:{virtuals:true}});
-const bookShelf = require('./bookshelf-schema');
 
-const book =  mongoose.Schema({
-  title: {type: String, require:true},
-  author: {type: String, require:true},
-  isbn: {type: String},
-  image_url: {type: String},
-  description: {type: String},
-  name: {type: String},
-  bookshelf_id: {type: String},
-},{toObject:{virtuals:true}, toJSON:{virtuals:true}});
+const book = mongoose.Schema({
+  title: {type: String, required: true},
+  author: {type: String, required: true},
+  isbn: {type: String, required: true},
+  image_url: {type: String, required: true},
+  description: {type: String, required: true},
+  bookshelf: {type: String, required: true},
+}, {toObject:{virtuals:true}, toJSON:{virtuals:true}});
 
-// book.virtual('bookShelf', {
-//   ref: 'booksShelf',
-//   localField: 'bookshelf_id',
-//   foreignField: 'shelf',
-//   justOne: false,
-// })
+book.virtual('bookshelff', {
+  ref: 'bookshelf',
+  localField: 'bookshelf',
+  foreignField: 'name',
+  justOne: false,
+});
+book.pre('find', function() {
+  try {
+    this.populate('bookshelff');
+  }
+  catch(e) {console.log('Find Error', e); }
+});
 
-
-// category.virtual('products', {
-//   ref: 'products',
-//   localField: 'name',
-//   foreignField: 'category',
-//   justOne: false,
-// });
 
 module.exports = mongoose.model('book', book);

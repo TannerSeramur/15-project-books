@@ -1,15 +1,14 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## Project Name
+## Book App
 
-### Author: Student/Group Name
+### Author: Tanner Seramur & Jared Pattison
 
 ### Links and Resources
 * [repo](http://xyz.com)
 * [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
-* [front-end](http://xyz.com) (when applicable)
+
 
 #### Documentation
 * [swagger](http://xyz.com) (API assignments only)
